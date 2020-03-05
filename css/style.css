@@ -1,0 +1,12 @@
+body {
+  background: #ccc;
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  background: white;
+}
