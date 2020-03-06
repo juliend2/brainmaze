@@ -108,14 +108,15 @@ class Table2d {
           --saturation-pct: ${saturationPct}%;
       ">
         <tbody>${
-          this.rows.map((row, y_i) => {
+          this.rows.map((rowCells, y_i) => {
             return `
               <tr class="table2D__row">
                 ${
-                  row.map((cell, x_i) => {
+                  rowCells.map((cell, x_i) => {
                     return `<td
                       id="x${x_i}-y${y_i}-z${this.depth}"
-                      class="table2D__cell">&nbsp;
+                      class="table2D__cell"
+                      style="width: calc(100% / ${rowCells.length});">&nbsp;
                     </td>`
                   }).join('')
                 }
