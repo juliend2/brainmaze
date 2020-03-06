@@ -4,9 +4,28 @@ body {
   margin: 0;
 }
 
+
 .main {
   width: 100%;
   max-width: 1024px;
   margin: 0 auto;
   background: white;
 }
+
+.app-instance {
+  position: relative;
+  perspective: 800px;
+}
+
+.table2D {
+  position: absolute;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table2D__cell {
+  min-height: 1rem;
+  line-height: 1rem;
+  outline: 1px solid blue;
+}
+
