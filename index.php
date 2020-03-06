@@ -63,12 +63,14 @@
         perspectiveSpan.innerText = selectedPerspective
       }
 
-      document.querySelector('#zoom-slider').onchange = (e) => {
-        const selectedZoomPct = e.target.value
-        // document.querySelector('#app-container').style.translate = 
-        appInstance.updateZoom(selectedZoomPct)
-        zoomSpan.innerText = selectedZoomPct
-      }
+      ['input', 'change'].forEach((eventType)=>{
+        document.querySelector('#zoom-slider').addEventListener(eventType, (e)=> {
+          const selectedZoomPct = e.target.value
+          // document.querySelector('#app-container').style.translate = 
+          appInstance.updateZoom(selectedZoomPct)
+          zoomSpan.innerText = selectedZoomPct
+        })
+      })
 
 
     </script>
