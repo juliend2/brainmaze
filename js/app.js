@@ -91,11 +91,13 @@ class Table2d {
   toString() {
     const x = getXTranslationPx(this.yRotationDegrees) * (this.depth + 1)
     const z = this.depth * 100 * this.zoomFraction
+    const saturationPct = (this.depth + 1) * 9;
     return `
       <table id="z${this.depth}" class="table2D"
         style="
-        transform: translate3d(${x}px, 0, ${z}px)
-          rotate3d(0, 1, 0, ${this.yRotationDegrees}deg);
+          transform: translate3d(${x}px, 0, ${z}px)
+            rotate3d(0, 1, 0, ${this.yRotationDegrees}deg);
+          --saturation-pct: ${saturationPct}%;
       ">
         <tbody>${
           this.rows.map((row, y_i) => {
