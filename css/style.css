@@ -31,3 +31,7 @@ body {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+.table2D__cell.focused {
+  outline: 1px solid red;
+}
+

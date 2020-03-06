@@ -44,17 +44,37 @@ class App {
       this.container.insertAdjacentHTML('beforeend', table.toString());
     })
 
-    this.container.querySelectorAll('.table2D__cell').forEach((cell)=>{
-      cell.addEventListener('click', (e)=>{
-        e.target.style.outline = '1px solid red';
-      })
-    })
-
     this.data.forEach(datum => {
       const id = `#x${datum.x}-y${datum.y}-z${datum.z}`
       console.log(id)
       const el = this.container.querySelector(id)
       el.innerText = datum.content
+    })
+
+    this.container.querySelectorAll('.table2D__cell').forEach((cell)=>{
+      cell.addEventListener('click', (e)=>{
+        const clickedCell = e.target
+        clickedCell.classList.add('focused')
+        const coordinates = clickedCell.id.split(/-/).map(s => {return parseInt(s.slice(1), 10)})
+        console.log(coordinates)
+        const foundCell = this.data.find(datum => {
+          return datum.x == coordinates[0] && datum.y == coordinates[1] && datum.z == coordinates[2]
+        })
+        if (foundCell) {
+          console.log(foundCell)
+          clickedCell.innerHTML = `
+            <form method="post" action=".">
+              <textarea rows="3" style="width:100%;">${foundCell.content}</textarea>
+            </form>
+          `;
+          clickedCell.querySelector('textarea').focus()
+          clickedCell.querySelector('textarea').addEventListener('blur', (e)=>{
+            console.log(clickedCell, e.target.value, 'is the new value')
+            clickedCell.innerText = e.target.value
+            clickedCell.classList.remove('focused')
+          })
+        }
+      })
     })
 
   }
