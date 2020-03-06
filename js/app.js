@@ -60,20 +60,19 @@ class App {
         const foundCell = this.data.find(datum => {
           return datum.x == coordinates[0] && datum.y == coordinates[1] && datum.z == coordinates[2]
         })
-        if (foundCell) {
-          console.log(foundCell)
-          clickedCell.innerHTML = `
-            <form method="post" action=".">
-              <textarea rows="3" style="width:100%;">${foundCell.content}</textarea>
-            </form>
-          `;
-          clickedCell.querySelector('textarea').focus()
-          clickedCell.querySelector('textarea').addEventListener('blur', (e)=>{
-            console.log(clickedCell, e.target.value, 'is the new value')
-            clickedCell.innerText = e.target.value
-            clickedCell.classList.remove('focused')
-          })
-        }
+        const defaultContent = foundCell ? foundCell.content : '';
+        console.log(foundCell)
+        clickedCell.innerHTML = `
+          <form method="post" action=".">
+            <textarea rows="3" style="width:100%;">${defaultContent}</textarea>
+          </form>
+        `;
+        clickedCell.querySelector('textarea').focus()
+        clickedCell.querySelector('textarea').addEventListener('blur', (e)=>{
+          console.log(clickedCell, e.target.value, 'is the new value')
+          clickedCell.innerText = e.target.value
+          clickedCell.classList.remove('focused')
+        })
       })
     })
 
