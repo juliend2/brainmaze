@@ -30,11 +30,11 @@ class App {
     const maxHeight = this.data.map(d=>d.y).max()
     // get matrix depth:
     const maxDepth = this.data.map(d=>d.z).max()
-    const columns = Array.from({length: maxWidth}, (v, i) => i)
-    const rows = Array.from({length: maxHeight}, (v, i) => {
+    const columns = Array.from({length: maxWidth+1}, (v, i) => i)
+    const rows = Array.from({length: maxHeight+1}, (v, i) => {
       return columns
     })
-    const box = Array.from({length: maxDepth}, (v, i) => {
+    const box = Array.from({length: maxDepth+1}, (v, i) => {
       return rows
     })
 
@@ -49,6 +49,14 @@ class App {
         e.target.style.outline = '1px solid red';
       })
     })
+
+    this.data.forEach(datum => {
+      const id = `#x${datum.x}-y${datum.y}-z${datum.z}`
+      console.log(id)
+      const el = this.container.querySelector(id)
+      el.innerText = datum.content
+    })
+
   }
 
   updateRotation(angleDegrees) {
@@ -79,12 +87,12 @@ class Table2d {
     this.yRotationDegrees = yRotationDegrees
     this.zoomPct = zoomPct
     this.zoomFraction = this.zoomPct / 100
-    const angles = [
-      0, 10, 20, 30, 45, 50, 60, 70, 80, 90
-    ];
-    for (let i = 0; i < angles.length; i++) {
-      console.log('Table2d toString', angles[i], getXTranslationPx(angles[i]))
-    }
+    // const angles = [
+    //   0, 10, 20, 30, 45, 50, 60, 70, 80, 90
+    // ];
+    // for (let i = 0; i < angles.length; i++) {
+    //   console.log('Table2d toString', angles[i], getXTranslationPx(angles[i]))
+    // }
   }
 
   // Returns an HTML String:
@@ -105,7 +113,10 @@ class Table2d {
               <tr class="table2D__row">
                 ${
                   row.map((cell, x_i) => {
-                    return `<td id="x${x_i}-y${y_i}-z${this.depth}" class="table2D__cell">&nbsp;</td>`
+                    return `<td
+                      id="x${x_i}-y${y_i}-z${this.depth}"
+                      class="table2D__cell">&nbsp;
+                    </td>`
                   }).join('')
                 }
               </tr>

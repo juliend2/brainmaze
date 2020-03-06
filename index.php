@@ -70,11 +70,6 @@
         zoomSpan.innerText = selectedZoomPct
       }
 
-      document.querySelectorAll('.table2D__cell').forEach((cell)=>{
-        cell.addEventListener('click', (e)=>{
-          e.target.style.outline = '1px solid red';
-        })
-      })
 
     </script>
   </body>
