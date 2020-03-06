@@ -51,19 +51,20 @@
       const perspectiveSpan = document.querySelector('#perspective')
       const zoomSpan = document.querySelector('#zoom')
 
-      document.querySelector('#angle-slider').onchange = (e) => {
-        const selectedAngle = e.target.value
-        appInstance.updateRotation(selectedAngle)
-        angleSpan.innerText = selectedAngle
-      }
+      const eventTypes = ['input', 'change']
+      eventTypes.forEach((eventType)=>{
+        document.querySelector('#angle-slider').addEventListener(eventType, (e) => {
+          const selectedAngle = e.target.value
+          appInstance.updateRotation(selectedAngle)
+          angleSpan.innerText = selectedAngle
+        })
 
-      document.querySelector('#perspective-slider').onchange = (e) => {
-        const selectedPerspective = e.target.value
-        document.querySelector('#app-container').style.perspective = selectedPerspective + 'px'
-        perspectiveSpan.innerText = selectedPerspective
-      }
+        document.querySelector('#perspective-slider').addEventListener(eventType, (e) => {
+          const selectedPerspective = e.target.value
+          document.querySelector('#app-container').style.perspective = selectedPerspective + 'px'
+          perspectiveSpan.innerText = selectedPerspective
+        })
 
-      ['input', 'change'].forEach((eventType)=>{
         document.querySelector('#zoom-slider').addEventListener(eventType, (e)=> {
           const selectedZoomPct = e.target.value
           // document.querySelector('#app-container').style.translate = 

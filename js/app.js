@@ -41,7 +41,7 @@ class App {
     // Draw it:
     box.forEach((rows, i) => {
       const table = new Table2d(rows, i, angleDegrees, this.zoomPct)
-      this.container.insertAdjacentHTML('afterbegin', table.toString());
+      this.container.insertAdjacentHTML('beforeend', table.toString());
     })
 
     this.data.forEach(datum => {
