@@ -14,7 +14,7 @@ class App {
     this.container = container
     this.data = data
     this.angleDegrees = 0 // default
-    this.zoomPct = 100
+    this.zoomPct = -100
     // do it:
     this.initialize()
   }
@@ -41,12 +41,11 @@ class App {
     // Draw it:
     box.forEach((rows, i) => {
       const table = new Table2d(rows, i, angleDegrees, this.zoomPct)
-      this.container.insertAdjacentHTML('beforeend', table.toString());
+      this.container.insertAdjacentHTML('afterbegin', table.toString());
     })
 
     this.data.forEach(datum => {
       const id = `#x${datum.x}-y${datum.y}-z${datum.z}`
-      console.log(id)
       const el = this.container.querySelector(id)
       el.innerText = datum.content
     })
@@ -56,12 +55,10 @@ class App {
         const clickedCell = e.target
         clickedCell.classList.add('focused')
         const coordinates = clickedCell.id.split(/-/).map(s => {return parseInt(s.slice(1), 10)})
-        console.log(coordinates)
         const foundCell = this.data.find(datum => {
           return datum.x == coordinates[0] && datum.y == coordinates[1] && datum.z == coordinates[2]
         })
         const defaultContent = foundCell ? foundCell.content : '';
-        console.log(foundCell)
         clickedCell.innerHTML = `
           <form method="post" action=".">
             <textarea rows="3" style="width:100%;">${defaultContent}</textarea>

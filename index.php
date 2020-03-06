@@ -23,8 +23,8 @@
       </div>
 
       <div>
-        Zoom: <input type="range" value="100" step='100' min='0' max='2000' id="zoom-slider"/>
-        <span id="zoom">100</span> %.
+        Zoom: <input type="range" value="-100" step='100' min='-1000' max='2000' id="zoom-slider"/>
+        <span id="zoom">-100</span> %.
       </div>
 
       <div id="app-container" class="app-instance"></div>
